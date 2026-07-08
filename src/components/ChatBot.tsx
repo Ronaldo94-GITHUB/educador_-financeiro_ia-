@@ -6,6 +6,13 @@ type Message = {
   text: string;
 };
 
+const quickQuestions = [
+  "Tenho dívidas",
+  "Quero guardar dinheiro",
+  "Gasto muito no cartão",
+  "Meu salário não rende",
+];
+
 function getBotResponse(question: string) {
   const normalizedQuestion = question.toLowerCase();
 
@@ -36,6 +43,7 @@ function getBotResponse(question: string) {
 
   if (
     normalizedQuestion.includes("salário") ||
+    normalizedQuestion.includes("salario") ||
     normalizedQuestion.includes("renda") ||
     normalizedQuestion.includes("ganho")
   ) {
@@ -55,19 +63,19 @@ export function ChatBot() {
     },
   ]);
 
-  function handleSendMessage() {
-    if (!inputValue.trim()) {
+  function sendMessage(text: string) {
+    if (!text.trim()) {
       return;
     }
 
     const userMessage: Message = {
       role: "user",
-      text: inputValue,
+      text,
     };
 
     const botMessage: Message = {
       role: "bot",
-      text: getBotResponse(inputValue),
+      text: getBotResponse(text),
     };
 
     setMessages((currentMessages) => [
@@ -77,6 +85,14 @@ export function ChatBot() {
     ]);
 
     setInputValue("");
+  }
+
+  function handleSendMessage() {
+    sendMessage(inputValue);
+  }
+
+  function handleQuickQuestion(question: string) {
+    sendMessage(question);
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -105,6 +121,18 @@ export function ChatBot() {
             <button className="chatbot-close" onClick={() => setIsOpen(false)}>
               <X size={20} />
             </button>
+          </div>
+
+          <div className="chatbot-quick-actions">
+            {quickQuestions.map((question) => (
+              <button
+                key={question}
+                type="button"
+                onClick={() => handleQuickQuestion(question)}
+              >
+                {question}
+              </button>
+            ))}
           </div>
 
           <div className="chatbot-messages">

@@ -51,12 +51,18 @@ export async function generateFinancialAnalysis(
 
   const totalExpenses = fixed + variable + debts;
   const balance = income - totalExpenses;
+
   const score = calculateFinancialScore(income, fixed, variable, debts);
   const scoreStatus = getScoreStatus(score);
 
   return {
     score,
     scoreStatus,
+    income,
+    fixedExpenses: fixed,
+    variableExpenses: variable,
+    debts,
+    balance,
 
     diagnosis:
       balance >= 0

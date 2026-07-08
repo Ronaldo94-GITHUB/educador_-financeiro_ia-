@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
+import { WelcomeScreen } from "./components/WelcomeScreen";
 import { ChatBot } from "./components/ChatBot";
 import { Header } from "./components/Header";
 import { StepForm } from "./components/StepForm";
 import { ResultCard } from "./components/ResultCard";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { SimulationHistory } from "./components/SimulationHistory";
 import { initialFinancialFormData } from "./types/finance";
-import type { FinancialAnalysis, FinancialFormData } from "./types/finance";
+import type {
+  FinancialAnalysis,
+  FinancialFormData,
+  SimulationHistoryItem,
+} from "./types/finance";
 import {
   clearFinancialData,
+  clearSimulationHistory,
   getFinancialData,
+  getSimulationHistory,
   saveFinancialData,
+  saveSimulationHistory,
 } from "./utils/storage";
 import { generateFinancialAnalysis } from "./services/geminiService";
 import "./index.css";
 
 function App() {
+  const [hasStarted, setHasStarted] = useState(false);
+
   const [formData, setFormData] = useState<FinancialFormData>(
     initialFinancialFormData
   );
@@ -23,6 +34,7 @@ function App() {
   const [analysis, setAnalysis] = useState<FinancialAnalysis | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [history, setHistory] = useState<SimulationHistoryItem[]>([]);
 
   useEffect(() => {
     const savedData = getFinancialData();
@@ -30,6 +42,8 @@ function App() {
     if (savedData) {
       setFormData(savedData);
     }
+
+    setHistory(getSimulationHistory());
 
     const savedTheme = localStorage.getItem("educador-financeiro-theme");
 
@@ -104,6 +118,16 @@ function App() {
       const result = await generateFinancialAnalysis(formData);
 
       setAnalysis(result);
+
+      const historyItem: SimulationHistoryItem = {
+        id: crypto.randomUUID(),
+        createdAt: new Date().toISOString(),
+        formData,
+        analysis: result,
+      };
+
+      saveSimulationHistory(historyItem);
+      setHistory(getSimulationHistory());
     } catch (error) {
       console.error(error);
       alert("Não foi possível gerar a análise. Tente novamente.");
@@ -117,6 +141,12 @@ function App() {
     setCurrentStep(0);
     setAnalysis(null);
     clearFinancialData();
+    setHasStarted(true);
+  }
+
+  function handleClearHistory() {
+    clearSimulationHistory();
+    setHistory([]);
   }
 
   function handleToggleTheme() {
@@ -143,27 +173,38 @@ function App() {
           onToggleTheme={handleToggleTheme}
         />
 
-        <Header />
-
-        {!analysis ? (
+        {!hasStarted && !analysis ? (
+          <WelcomeScreen onStart={() => setHasStarted(true)} />
+        ) : (
           <>
-            <StepForm
-              formData={formData}
-              currentStep={currentStep}
-              onChange={handleChange}
-              onNext={handleNext}
-              onBack={handleBack}
-              onSubmit={handleSubmit}
+            <Header />
+
+            <SimulationHistory
+              history={history}
+              onClearHistory={handleClearHistory}
             />
 
-            {isLoading && (
-              <p className="loading-text">
-                Gerando diagnóstico financeiro...
-              </p>
+            {!analysis ? (
+              <>
+                <StepForm
+                  formData={formData}
+                  currentStep={currentStep}
+                  onChange={handleChange}
+                  onNext={handleNext}
+                  onBack={handleBack}
+                  onSubmit={handleSubmit}
+                />
+
+                {isLoading && (
+                  <p className="loading-text">
+                    Gerando diagnóstico financeiro...
+                  </p>
+                )}
+              </>
+            ) : (
+              <ResultCard analysis={analysis} onReset={handleReset} />
             )}
           </>
-        ) : (
-          <ResultCard analysis={analysis} onReset={handleReset} />
         )}
       </div>
 

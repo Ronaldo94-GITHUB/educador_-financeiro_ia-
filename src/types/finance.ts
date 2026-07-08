@@ -15,6 +15,18 @@ export type FinancialAnalysis = {
   simpleSummary: string;
   score: number;
   scoreStatus: string;
+  income: number;
+  fixedExpenses: number;
+  variableExpenses: number;
+  debts: number;
+  balance: number;
+};
+
+export type SimulationHistoryItem = {
+  id: string;
+  createdAt: string;
+  formData: FinancialFormData;
+  analysis: FinancialAnalysis;
 };
 
 export const initialFinancialFormData: FinancialFormData = {
