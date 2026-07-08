@@ -1,5 +1,11 @@
 import type { FinancialAnalysis } from "../types/finance";
-import { CheckCircle, Lightbulb, ListChecks, AlertTriangle } from "lucide-react";
+import {
+  AlertTriangle,
+  CheckCircle,
+  Gauge,
+  Lightbulb,
+  ListChecks,
+} from "lucide-react";
 
 type ResultCardProps = {
   analysis: FinancialAnalysis;
@@ -14,6 +20,18 @@ export function ResultCard({ analysis, onReset }: ResultCardProps) {
         <div>
           <h2>Diagnóstico financeiro</h2>
           <p>Veja uma análise educativa baseada na sua simulação.</p>
+        </div>
+      </div>
+
+      <div className="score-card">
+        <div className="score-icon">
+          <Gauge size={30} />
+        </div>
+
+        <div className="score-content">
+          <span>Score financeiro</span>
+          <strong>{analysis.score}/100</strong>
+          <p>{analysis.scoreStatus}</p>
         </div>
       </div>
 

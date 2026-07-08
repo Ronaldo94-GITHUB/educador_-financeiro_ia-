@@ -13,6 +13,8 @@ export type FinancialAnalysis = {
   recommendations: string[];
   nextSteps: string[];
   simpleSummary: string;
+  score: number;
+  scoreStatus: string;
 };
 
 export const initialFinancialFormData: FinancialFormData = {

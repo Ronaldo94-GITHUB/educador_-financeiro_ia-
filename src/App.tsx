@@ -1,5 +1,5 @@
-import { ChatBot } from "./components/ChatBot";
 import { useEffect, useState } from "react";
+import { ChatBot } from "./components/ChatBot";
 import { Header } from "./components/Header";
 import { StepForm } from "./components/StepForm";
 import { ResultCard } from "./components/ResultCard";
@@ -50,7 +50,41 @@ function App() {
     }));
   }
 
+  function isCurrentStepValid() {
+    if (currentStep === 0) {
+      return Number(formData.monthlyIncome) > 0;
+    }
+
+    if (currentStep === 1) {
+      return (
+        formData.fixedExpenses !== "" &&
+        formData.variableExpenses !== "" &&
+        Number(formData.fixedExpenses) >= 0 &&
+        Number(formData.variableExpenses) >= 0
+      );
+    }
+
+    if (currentStep === 2) {
+      return formData.debts !== "" && Number(formData.debts) >= 0;
+    }
+
+    if (currentStep === 3) {
+      return formData.financialGoal.trim().length >= 5;
+    }
+
+    if (currentStep === 4) {
+      return formData.knowledgeLevel !== "";
+    }
+
+    return true;
+  }
+
   function handleNext() {
+    if (!isCurrentStepValid()) {
+      alert("Preencha corretamente esta etapa antes de continuar.");
+      return;
+    }
+
     setCurrentStep((prevStep) => Math.min(prevStep + 1, 4));
   }
 
@@ -59,18 +93,23 @@ function App() {
   }
 
   async function handleSubmit() {
-  try {
-    setIsLoading(true);
+    if (!isCurrentStepValid()) {
+      alert("Preencha corretamente esta etapa antes de gerar o diagnóstico.");
+      return;
+    }
 
-    const result = await generateFinancialAnalysis(formData);
+    try {
+      setIsLoading(true);
 
-    setAnalysis(result);
-  } catch (error) {
-    console.error(error);
-    alert("Não foi possível gerar a análise com IA. Confira sua chave Gemini e tente novamente.");
-  } finally {
-    setIsLoading(false);
-  }
+      const result = await generateFinancialAnalysis(formData);
+
+      setAnalysis(result);
+    } catch (error) {
+      console.error(error);
+      alert("Não foi possível gerar a análise. Tente novamente.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function handleReset() {
@@ -126,7 +165,7 @@ function App() {
         ) : (
           <ResultCard analysis={analysis} onReset={handleReset} />
         )}
-            </div>
+      </div>
 
       <ChatBot />
     </main>
