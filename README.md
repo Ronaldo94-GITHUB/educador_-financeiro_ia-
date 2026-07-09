@@ -4,6 +4,8 @@
 
 ---
 🎯 Objetivos do Projeto
+
+
 Praticar desenvolvimento Front-End com React e TypeScript
 Criar uma aplicação web moderna e responsiva
 Aplicar componentização e organização de código
