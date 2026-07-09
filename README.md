@@ -191,6 +191,18 @@ Demonstrar habilidades em Front-End, UX/UI e lógica de negócio
 flowchart TD
     A[Usuário acessa a aplicação] --> B[Tela inicial]
     B --> C[Clica em Começar simulação]
+    C --> D[Preenche formulário financeiro]
+    D --> E{Campos válidos?}
+    E -->|Não| F[Exibe alerta de validação]
+    F --> D
+    E -->|Sim| G[Gera diagnóstico financeiro]
+    G --> H[Calcula saldo final]
+    H --> I[Calcula score financeiro]
+    I --> J[Exibe resultado]
+    J --> K[Mostra gráfico financeiro]
+    J --> L[Salva histórico no navegador]
+    J --> M[Permite baixar PDF]
+    J --> N[Permite refazer simulação]
 ```
 
 ---
