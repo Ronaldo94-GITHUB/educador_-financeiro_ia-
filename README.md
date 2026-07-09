@@ -187,6 +187,12 @@ Demonstrar habilidades em Front-End, UX/UI e lógica de negócio
 
 🔄 Fluxo da Aplicação
 
+```mermaid
+flowchart TD
+    A[Usuário acessa a aplicação] --> B[Tela inicial]
+    B --> C[Clica em Começar simulação]
+```
+
 ---
 
 🧾 Fluxo do Formulário
