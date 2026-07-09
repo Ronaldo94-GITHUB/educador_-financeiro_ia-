@@ -383,6 +383,101 @@ Testes automatizados
 Responsividade mobile aprimorada
 
 ---
+# 🔄 Fluxo da Aplicação
+
+```mermaid
+flowchart TD
+    A[Usuário acessa a aplicação] --> B[Tela inicial]
+    B --> C[Clica em Começar simulação]
+    C --> D[Preenche formulário financeiro]
+    D --> E{Campos válidos?}
+    E -->|Não| F[Exibe alerta de validação]
+    F --> D
+    E -->|Sim| G[Gera diagnóstico financeiro]
+    G --> H[Calcula saldo final]
+    H --> I[Calcula score financeiro]
+    I --> J[Exibe resultado]
+    J --> K[Mostra gráfico financeiro]
+    J --> L[Salva histórico no navegador]
+    J --> M[Permite baixar PDF]
+    J --> N[Permite refazer simulação]
+```
+
+---
+
+# 🧾 Fluxo do Formulário
+
+```mermaid
+flowchart LR
+    A[Renda mensal] --> B[Gastos fixos e variáveis]
+    B --> C[Dívidas ou parcelas]
+    C --> D[Objetivo financeiro]
+    D --> E[Nível de conhecimento]
+    E --> F[Gerar diagnóstico]
+```
+
+---
+
+# 🧠 Fluxo do Diagnóstico Financeiro
+
+```mermaid
+flowchart TD
+    A[Dados preenchidos] --> B[Converter valores para número]
+    B --> C[Somar gastos fixos, variáveis e dívidas]
+    C --> D[Calcular saldo final]
+    D --> E[Calcular proporção de gastos]
+    E --> F[Calcular proporção de dívidas]
+    F --> G[Gerar score de 0 a 100]
+    G --> H[Definir status financeiro]
+    H --> I[Montar recomendações]
+    I --> J[Exibir resultado na tela]
+```
+
+---
+
+# 💬 Fluxo do Chatbot
+
+```mermaid
+flowchart TD
+    A[Usuário abre o chatbot] --> B[Digita pergunta ou clica em pergunta rápida]
+    B --> C[Texto é analisado localmente]
+    C --> D{Contém palavra-chave?}
+    D -->|Dívida, parcelas ou cartão| E[Resposta sobre organização de dívidas]
+    D -->|Guardar, reserva ou economizar| F[Resposta sobre reserva financeira]
+    D -->|Gastos, reduzir ou cortar| G[Resposta sobre controle de gastos]
+    D -->|Salário, renda ou ganho| H[Resposta sobre organização da renda]
+    D -->|Nenhuma palavra-chave| I[Resposta geral de orientação]
+```
+
+---
+
+# 🕓 Fluxo do Histórico
+
+```mermaid
+flowchart TD
+    A[Usuário gera diagnóstico] --> B[Criar item de histórico]
+    B --> C[Salvar no LocalStorage]
+    C --> D[Atualizar estado do React]
+    D --> E[Exibir histórico na tela]
+    E --> F{Usuário limpa histórico?}
+    F -->|Sim| G[Remover histórico do LocalStorage]
+    F -->|Não| H[Manter últimas simulações]
+```
+
+---
+
+# 📥 Fluxo de Exportação em PDF
+
+```mermaid
+flowchart TD
+    A[Usuário clica em Baixar PDF] --> B[Captura área do relatório]
+    B --> C[Converte HTML em canvas]
+    C --> D[Gera imagem]
+    D --> E[Cria PDF com jsPDF]
+    E --> F[Baixa arquivo diagnostico-financeiro.pdf]
+```
+
+---
 
 👨‍💻 Autor
 Ronaldo Augusto Sabino
