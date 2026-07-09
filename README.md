@@ -255,6 +255,9 @@ Classificação utilizada:
 60 a 79: Atenção moderada
 40 a 59: Situação de alerta
 0 a 39: Prioridade alta de reorganização
+
+---
+
 💾 Persistência de Dados
 
 O projeto utiliza LocalStorage para salvar informações no navegador.
@@ -268,7 +271,13 @@ Histórico das últimas simulações
 Arquivo responsável:
 
 src/utils/storage.ts
+
+---
+
 🕓 Fluxo do Histórico
+
+---
+
 📄 Exportação em PDF
 
 Após gerar o diagnóstico financeiro, a pessoa usuária pode baixar um relatório em PDF contendo:
@@ -285,6 +294,9 @@ Bibliotecas utilizadas:
 
 jsPDF
 html2canvas
+
+---
+
 📥 Fluxo de Exportação em PDF
 
 ---
@@ -313,6 +325,8 @@ Contato
 
 💼 LinkedIn:
 https://www.linkedin.com/in/ronaldo-a-sabino-381a07213
+
+⭐ Projeto desenvolvido para fins educacionais e demonstração de habilidades em Front-End, React, TypeScript, UX/UI e Educação Financeira.
 
 🐙 GitHub:
 https://github.com/Ronaldo94-GITHUB
