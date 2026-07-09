@@ -290,4 +290,31 @@ html2canvas
 
 ---
 
+🔮 Melhorias Futuras
+Integração real com Google Gemini API
+Chatbot com IA Generativa
+Login de usuário
+Banco de dados com Supabase ou Firebase
+Histórico persistente em nuvem
+Dashboard mensal
+Mais gráficos financeiros
+Comparativo entre simulações
+Planejamento financeiro de 30 dias
+Deploy final na Vercel
+Testes automatizados
+Responsividade mobile aprimorada
+👨‍💻 Autor
+Ronaldo Augusto Sabino
+Contato
+
+📧 ronaldosabino94@hotmail.com
+
+💼 LinkedIn:
+https://www.linkedin.com/in/ronaldo-a-sabino-381a07213
+
+🐙 GitHub:
+https://github.com/Ronaldo94-GITHUB
+
+⭐ Projeto desenvolvido para fins educacionais e demonstração de habilidades em Front-End, React, TypeScript, UX/UI e Educação Financeira
+
 
