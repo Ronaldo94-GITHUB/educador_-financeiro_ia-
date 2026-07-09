@@ -338,7 +338,7 @@ flowchart TD
 ```
 ---
 
-📄 Exportação em PDF
+📄 Exportação em PDFs
 
 Após gerar o diagnóstico financeiro, a pessoa usuária pode baixar um relatório em PDF contendo:
 
