@@ -1,4 +1,4 @@
-
+EDUCADOR FINANCEIRO IA
 
 ![Capa do Projeto](Capa.png)
 
